@@ -1,0 +1,36 @@
+﻿Testing Overview/Examples:
+
+
+Our overall goal in testing this program is to achieve all basic levels of testing, including the following concepts: code coverage, branch coverage, boundary tests, good and bad data and a stress test.
+
+
+We have 3 boundary classes to accept input for the three areas of our code which accept input: The tree, our rules and the list of types.
+
+
+First we test for the tree input to ensure that it is a valid tree. We note the following cases as leading to a non-valid tree:
+* If it has two operators in a row
+* Is the tree is empty
+* If it has two nonConnector objects in a row
+* If there are an equal number of open and close parentheses
+* If all parentheses are ordered such that an open comes before a close
+* If the first object in the list is a valid first object and not a plus, times, divide, close or exponential
+* If the last object in the list is a valid last object and not a plus, minus, times, divide, open or exponential
+In testing, we will test for examples of all these cases as well as nominal cases which should not trigger any of these tests.
+
+
+Second we test for the rules input to ensure that it is a valid list of rules. We note the following cases as leading to a non-valid rules list:
+* If the file of rules is empty
+* If the types used are valid
+* If the rule itself is valid
+* If there is a valid return type of the rule
+
+
+In testing, we will test for examples for all these cases being false, as well as the nominal cases which should not trigger any of these tests.
+
+
+Third, we test for the type list input to ensure that all objects in the tree are types that are supported within the list. We note the following cases as leading to this condition being false:
+* If the types list is empty
+* If all objects within the tree are within the list
+
+
+In testing, we will test for examples for all these cases being false, as well as the nominal cases which should not trigger any of these tests.
