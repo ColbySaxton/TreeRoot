@@ -9,6 +9,10 @@ public enum Bridger implements Connector {
 	
 	private HashMap<Bridger, String> stringMap;
 	
+	public Bridger getType() {
+		return this;
+	}
+	
 	public String toString() {
 		stringMap.put(OPEN, "(");
 		stringMap.put(CLOSE, ")");
