@@ -1,4 +1,4 @@
-package Root;
+package typecheck;
 
 public class MainInput {
 

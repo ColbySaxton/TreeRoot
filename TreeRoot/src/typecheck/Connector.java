@@ -1,4 +1,4 @@
-package Root;
+package typecheck;
 import java.util.HashMap;
 
 public interface Connector {

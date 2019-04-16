@@ -1,4 +1,4 @@
-package Root;
+package typecheck;
 
 public class StringBarricade implements Barricade {
 	private String input;
@@ -27,7 +27,8 @@ public class StringBarricade implements Barricade {
 		
 	}
 	
-	private boolean splitRuleAndReturn() {
+	private String[] splitRuleAndReturn() {
+		String[] seperateRuleReturn;
 		
 	}
 	
