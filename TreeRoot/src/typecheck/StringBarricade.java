@@ -28,8 +28,12 @@ public class StringBarricade implements Barricade {
 	}
 	
 	private String[] splitRuleAndReturn() {
-		String[] seperateRuleReturn;
-		
+		String[] separateRuleReturn = null;
+		CharSequence divider = ":";
+		if(input.contains(divider)) {
+			separateRuleReturn = input.split("\\:");
+		}	
+		return separateRuleReturn;
 	}
 	
 	private boolean isValidReturn() {
