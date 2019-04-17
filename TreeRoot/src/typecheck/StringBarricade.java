@@ -1,12 +1,15 @@
 package typecheck;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringBarricade implements Barricade {
 	private String input;
 	
 	private boolean isValidRule(String rule) {
-		ArrayList<String> operators = new ArrayList<String>();
+		ArrayList<CharSequence> operators = new ArrayList<CharSequence>();
 		boolean hasOperator = false;
 		operators.add("+");
 		operators.add("-");
@@ -14,49 +17,30 @@ public class StringBarricade implements Barricade {
 		operators.add("*");
 		operators.add("^");
 		for(int i = 0; i >= operators.size(); i++) {
-			CharSequence iterOp = operators.get(i);
-			if(rule.contains(iterOp)) {
+			if(rule.contains(operators.get(i))) {
 				hasOperator = true;
 			}
 		}
-		if(rule.startsWith("function") || (hasOperator == true)) {
-			return true;
-		}
-		return false;
+		return rule.startsWith("function") || hasOperator;
 	}
 	
 	public boolean isValid(String thisinput) {
 		input = thisinput;
-		if(isEmpty()) {
-			return false;
-		}
-		String[] splitRuleReturn = splitRuleAndReturn();
-		if(!isValidSplit(splitRuleReturn) || !isValidRule(splitRuleReturn[0])) {
-			return false;
-		}
-		return true;
+		return !isEmpty() && isValidSplit(splitRuleAndReturn()) && isValidRule(splitRuleAndReturn()[0]);
 	}
 	
 	public boolean isValidSplit(String[] split) {
-		if(split.length != 2) {
-			return false;
-		}
-		return true;
+		return split.length != 2;
 	}
 	
 	public boolean isEmpty() {
-		if(input.length() == 0) {
-			return true;
-		}
-		return false;
+		return input.isEmpty();
 	}
 	
 	private String[] splitRuleAndReturn() {
-		String[] separateRuleReturn = null;
-		CharSequence divider = "=";
-		if(input.contains(divider)) {
-			separateRuleReturn = input.split("\\=");
-		}	
-		return separateRuleReturn;
+		List<String> separateRuleReturn = Stream.of(input.split("="))
+				.map (elem -> new String(elem))
+				.collect(Collectors.toList());
+		return separateRuleReturn.toArray(new String[0]);
 	}
 }
