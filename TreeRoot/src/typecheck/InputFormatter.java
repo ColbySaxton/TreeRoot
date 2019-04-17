@@ -5,31 +5,32 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputFormatter {
-	String parseString;
-	List<Object> restOfTree;
+	private String parseString;
+	private List<Object> restOfTree;
 	
 	public InputFormatter(List<Object> tree) {
 		restOfTree = tree;
+		parseString = "";
 	}
 	
 	public String makeTreeString() {
 		for(Object currentNode: restOfTree) {		
-				String typename = this.findCurrentType(currentNode).replaceAll("\\s+", "");
-				typename = this.checkCurrentType(typename);
+				String typename = this.checkCurrentType(currentNode).replaceAll("\\s+", "");
+				typename = this.findCurrentType(typename);
 				this.insertIntoTree(typename);
 		}
 		return parseString;
 	}
 	
-	private String findCurrentType(Object currentItem) {
+	private String checkCurrentType(Object currentItem) {
 		if (currentItem instanceof String) {
 			return ((String) currentItem).startsWith("function") ? (String) currentItem : "String";
 		}else {
-			return Connector.stringMap.containsKey(currentItem) ? currentItem.toString() : currentItem.getClass().getName();
+			return currentItem instanceof Connector ? currentItem.toString() : currentItem.getClass().getName();
 		}
 	}
 	
-	private String checkCurrentType(String currentItem) {
+	private String findCurrentType(String currentItem) {
 		List<String> wordParts = Stream.of(currentItem.split("[.]"))
 									.map (elem -> new String(elem))
 									.collect(Collectors.toList());
@@ -39,4 +40,15 @@ public class InputFormatter {
 	private void insertIntoTree(String currentItem) {
 		parseString = parseString + currentItem;
 	}
+	
+	
+	
+	public String tFindCurrentType(String testItem) {
+		return findCurrentType(testItem);
+	}
+	
+	public String tCheckCurrentType(Object testItem) {
+		return checkCurrentType(testItem);
+	}
+
 }

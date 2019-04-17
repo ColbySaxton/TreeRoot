@@ -7,7 +7,7 @@ public enum Bridger implements Connector {
 	CLOSE,
 	FUNCTION;
 	
-	private HashMap<Bridger, String> stringMap;
+	private HashMap<Bridger, String> stringMap = new HashMap<Bridger, String>();
 	
 	public Bridger getType() {
 		return this;
