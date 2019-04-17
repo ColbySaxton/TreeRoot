@@ -42,6 +42,6 @@ public class MainInput {
 		ruleset.parseRules();
 		
 		Parser parser = new Parser(tree, ruleset);
-		System.out.println("The tree resolves to the type " + parser.replaceRules(tree) + " with the given types and rules");
+		System.out.println("The tree resolves to the type " + parser.replaceRules(tree, true) + " with the given types and rules");
 	}
 }
