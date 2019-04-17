@@ -29,10 +29,7 @@ public class TreeBarricade implements Barricade {
 		}
 		boolean firstIter = tree.get(i - 1) instanceof Operator;
 		boolean secondIter = tree.get(i) instanceof Operator;
-		if(firstIter && secondIter) {
-			return true;
-		}
-		return false;
+		return firstIter && secondIter;
 	}
 	
 	private boolean hasRepeatNonConnector(int i) {
@@ -41,10 +38,7 @@ public class TreeBarricade implements Barricade {
 		}
 		boolean firstIter = tree.get(i - 1) instanceof Connector;
 		boolean secondIter = tree.get(i) instanceof Connector;
-		if(!firstIter && !secondIter) {
-			return true;
-		}	
-		return false;
+		return !firstIter && !secondIter;
 		
 	}
 	
@@ -82,12 +76,7 @@ public class TreeBarricade implements Barricade {
 	}
 	
 	private boolean hasValidFirstObject() {
-		if(tree.get(0) instanceof Operator) {
-			if(!(((Operator)tree.get(0)).getType() == Operator.MINUS)) {
-				return false;
-			}
-		}
-		return true;
+		return (tree.get(0) instanceof Operator) ? ((Operator)tree.get(0)).getType() == Operator.MINUS : true;
 	}
 	
 	private boolean hasValidLastObject() {
@@ -104,13 +93,7 @@ public class TreeBarricade implements Barricade {
 	}
 	
 	private boolean areRepeats(int i) {
-		if(hasRepeatOperator(i)) {
-			return true;
-		}
-		if(hasRepeatNonConnector(i)) {
-			return true;
-		}
-		return false;
+		return hasRepeatOperator(i) || hasRepeatNonConnector(i);
 	}
 	
 	public boolean isEmpty() {
@@ -119,14 +102,9 @@ public class TreeBarricade implements Barricade {
 	
 	public boolean isValid(List<Object> newTree) {
 		tree = newTree;
-		if(isEmpty()) {
-			return false;
-		}
-		if(!hasValidFirstObject() || !hasValidLastObject()) {
-			return false;
-		}
-		return iterateThroughTree();
+		return !isEmpty() && hasValidFirstObject() && hasValidLastObject() && iterateThroughTree();
 	}
+	
 	class TestHook {
 		
 		public boolean iterateThroughTreeTest(List<Object> thistree) {

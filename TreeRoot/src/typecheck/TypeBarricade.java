@@ -1,6 +1,8 @@
 package typecheck;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TypeBarricade {
 	List<Object> tree;
@@ -8,12 +10,14 @@ public class TypeBarricade {
 	
 	private String objectToString(int i) {
 		String string = tree.get(i).getClass().getName();
-		String[] objectString = string.split("\\.");
-		return objectString[objectString.length - 1];
+		List<String> objectString = Stream.of(string.split("[.]"))
+									.map (elem -> new String(elem))
+									.collect(Collectors.toList());
+		return objectString.get(objectString.size()-1);
 	}
 	
 	private boolean isEmpty() {
-		return types.size() == 0;
+		return types.isEmpty();
 	}
 	
 	private boolean isObjectinList(String object) {
