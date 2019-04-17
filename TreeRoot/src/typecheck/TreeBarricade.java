@@ -104,6 +104,9 @@ public class TreeBarricade implements Barricade {
 		return (tree.get(0) instanceof Operator) ? ((Operator)tree.get(0)).getType() == Operator.MINUS : true;
 	}
 	
+	/* checks to see if the last object is valid 
+	 * if it doesnt have an operator, and if it doesnt have an open parenthesis
+	 */
 	private boolean hasValidLastObject() {
 		int lastIndex = tree.size() - 1;
 		if(tree.get(lastIndex) instanceof Operator) {
@@ -119,10 +122,12 @@ public class TreeBarricade implements Barricade {
 		return true;
 	}
 	
+	/* checks to see if there are any repeats at index i */
 	private boolean areRepeats(int i) {
 		return hasRepeatOperator(i) || hasRepeatNonConnector(i);
 	}
 	
+	/* checks to see if the input object tree is empty */
 	public boolean isEmpty() {
 		if(tree.isEmpty()) {
 			System.out.println("ERROR: the list of objects is empty.");
@@ -131,6 +136,7 @@ public class TreeBarricade implements Barricade {
 		return false;
 	}
 	
+	/* checks to see if the tree is overall valid */
 	public boolean isValid(List<Object> newTree) {
 		tree = newTree;
 		if(!hasValidFirstObject()) {
@@ -139,6 +145,7 @@ public class TreeBarricade implements Barricade {
 		return !isEmpty() && hasValidFirstObject() && hasValidLastObject() && iterateThroughTree();
 	}
 	
+	/* testhook class */
 	class TestHook {
 		
 		public boolean iterateThroughTreeTest(List<Object> thistree) {

@@ -14,3 +14,8 @@
 /TypeBarricadeTest.class
 /TypeBarricade$TestHook.class
 /InputFormatterTest.class
+/StringBarricade$TestHook.class
+/InputFormatter$TestHook.class
+/StringBarricadeTest.class
+/BridgerTest.class
+/OperatorTest.class
