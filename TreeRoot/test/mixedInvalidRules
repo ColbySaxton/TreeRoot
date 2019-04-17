@@ -1,0 +1,6 @@
+Double + Integer = Complex
+function F(Double, Complex) = Tuple
+function G(Double, float) = a
+function funk(Integer, Integer) = Integer
+Integer + Integer = Long
+Complex + Complex = Float
