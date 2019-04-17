@@ -10,6 +10,12 @@ public class MainInput {
 	private List<Object> parseTree;
 	private List<String> types;
 	
+	/**The main method of the program that puts all other parts together
+	 * parses a valid tree given a set of rules
+	 * @param userTree = the tree given
+	 * @param filename = the name of the file with the rules
+	 * @param validTypes = the types allowed
+	 */
 	public void runParser(List<Object> userTree, String filename, List<String> validTypes){
 		parseTree = userTree;
 		rulesFilename = filename;
