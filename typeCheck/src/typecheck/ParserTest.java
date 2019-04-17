@@ -62,6 +62,8 @@ public class ParserTest {
 		assertEquals(parse2.replaceRules(inputString2, input), "Float");
 	}
 	
+	/* works with removing parentheses */
+	
 	//@Test
 	//public void removeParenthesesTest {
 	//	assertEquals(standardHook.removeParenthesisTest("((Integer + Float))"), "Integer + Float");

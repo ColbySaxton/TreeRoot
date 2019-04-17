@@ -34,9 +34,9 @@ public class Parser {
 					tree = tree.replace(thisKey, thisMapped);
 				}
 			}
+			tree = removeParenthesis(tree);
 			replaceRules(tree, hasReplaced);
 		}
-		tree = removeParenthesis(tree);
 		return tree;
 	}
 	
