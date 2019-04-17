@@ -17,7 +17,7 @@ public class Parser {
 	 * based on the input rules class
 	 */
 	public String replaceRules(String input) {
-		tree = input;
+		tree = removeParenthesis(input);
 		boolean hasReplaced = true;
 		HashMap<String, String> ruleMap = ruleSet.getMap();
 		if(hasReplaced == false) {
@@ -36,6 +36,13 @@ public class Parser {
 			replaceRules(tree);
 		}
 		return tree;
+	}
+	
+	private String removeParenthesis(String input) {
+		String thisTree = input;
+		thisTree.replaceAll("(", "");
+		thisTree.replaceAll(")", "");
+		return thisTree;
 	}
 	
 }
