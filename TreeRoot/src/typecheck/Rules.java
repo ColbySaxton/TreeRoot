@@ -25,12 +25,10 @@ public class Rules {
 			reader = new BufferedReader(new FileReader(readRulesFile));
 			String line = reader.readLine();
 			while(line != null) {
-				System.out.println(line);
 				if(barricade.isValid(line)) {
 					List<String> ruleParts = Stream.of(line.replaceAll("\\s+", "").split("="))
 							.map (elem -> new String(elem))
 							.collect(Collectors.toList());
-					System.out.println(ruleParts.toString());
 					addRule(ruleParts.get(0), ruleParts.get(1));
 				}
 				line = reader.readLine();
