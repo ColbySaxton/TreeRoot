@@ -13,6 +13,9 @@ public class TreeBarricade implements Barricade {
 			if(areRepeats(i)) {
 				return false;
 			}
+			if(isNotStringFunction(i)) {
+				return false;
+			}
 			openCount = checkOpen(i, openCount);
 			closeCount = checkClose(i, closeCount);
 			parenthesisCount = checkCorrectOrderedParenthesis(i, parenthesisCount);
@@ -21,6 +24,14 @@ public class TreeBarricade implements Barricade {
 			}
 		}
 		return openCount == closeCount;
+	}
+	
+	private boolean isNotStringFunction(int i) {
+		Object object = tree.get(i);
+		if(object instanceof String) {
+			return !((String) object).startsWith("Function");
+		}
+		return false;
 	}
 	
 	private boolean hasRepeatOperator(int i) {
@@ -110,6 +121,11 @@ public class TreeBarricade implements Barricade {
 		public boolean iterateThroughTreeTest(List<Object> thistree) {
 			tree = thistree;
 			return iterateThroughTree();
+		}
+		
+		public boolean isNotStringFunctionTest(int i, List<Object> thistree) {
+			tree = thistree;
+			return isNotStringFunction(i);
 		}
 		
 		public boolean hasRepeatOperatorTest(int i, List<Object> thistree) {

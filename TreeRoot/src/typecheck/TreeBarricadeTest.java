@@ -21,6 +21,8 @@ public class TreeBarricadeTest {
 	private static final List<Object> expfirstTree = new ArrayList<Object>();
 	private static final List<Object> plusEndTree = new ArrayList<Object>();
 	private static final List<Object> openEndTree = new ArrayList<Object>();
+	private static final List<Object> stringGood = new ArrayList<Object>();
+	private static final List<Object> stringBad = new ArrayList<Object>();
 	
 	static {
 		int i = 1;
@@ -30,6 +32,8 @@ public class TreeBarricadeTest {
 		Bridger open = Bridger.OPEN;
 		Bridger close = Bridger.CLOSE;
 		double j = 1.0;
+		String func = "Function john(Integer + Double)";
+		String bad = "whats up";
 		goodTree.add(i);
 		goodTree.add(plus);
 		goodTree.add(j);
@@ -61,6 +65,12 @@ public class TreeBarricadeTest {
 		openEndTree.add(plus);
 		openEndTree.add(j);
 		openEndTree.add(open);
+		stringGood.add(i);
+		stringGood.add(plus);
+		stringGood.add(func);
+		stringBad.add(i);
+		stringBad.add(plus);
+		stringBad.add(bad);
 	}
 	
 	/** iterateThroughTree tests **/
@@ -95,6 +105,31 @@ public class TreeBarricadeTest {
 	@Test
 	public void unevenParenIterateThroughTest() {
 		assertFalse(standardHook.iterateThroughTreeTest(unevenParenTree));
+	}
+	
+	/* string not good */
+	@Test
+	public void badStringIterateThroughTest() {
+		assertFalse(standardHook.iterateThroughTreeTest(stringBad));
+	}
+	
+	/** isNotStringFunction **/
+	/* is not a string */
+	@Test
+	public void notStringTest() {
+		assertFalse(standardHook.isNotStringFunctionTest(0, stringGood));
+	}
+	
+	/* is a string that is not a function */
+	@Test
+	public void stringNotFunctionTest() {
+		assertTrue(standardHook.isNotStringFunctionTest(2, stringBad));
+	}
+	
+	/* is a function string */
+	@Test
+	public void stringIsFunctionTest() {
+		assertFalse(standardHook.isNotStringFunctionTest(2, stringGood));
 	}
 	
 	/** hasRepeatOperator test **/
