@@ -34,6 +34,7 @@ public class Rules {
 				line = reader.readLine();
 			}
 		} catch (IOException e) {
+			System.out.println("Most likely source of error, file not found");
 			e.printStackTrace();
 		}
 	}
