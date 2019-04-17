@@ -9,7 +9,7 @@ public class TreeBarricade implements Barricade {
 		int openCount = 0;
 		int closeCount = 0;
 		int parenthesisCount = 0;
-		for(int i = 0; i >= tree.size(); i++) {
+		for(int i = 0; i < tree.size(); i++) {
 			if(areRepeats(i)) {
 				return false;
 			}
@@ -20,10 +20,7 @@ public class TreeBarricade implements Barricade {
 				return false;
 			}
 		}
-		if(openCount != closeCount) {
-			return false;
-		}
-		return true;
+		return openCount == closeCount;
 	}
 	
 	private boolean hasRepeatOperator(int i) {
@@ -108,12 +105,12 @@ public class TreeBarricade implements Barricade {
 	
 	private boolean areRepeats(int i) {
 		if(hasRepeatOperator(i)) {
-			return false;
+			return true;
 		}
 		if(hasRepeatNonConnector(i)) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public boolean isEmpty() {
@@ -130,13 +127,57 @@ public class TreeBarricade implements Barricade {
 		}
 		return iterateThroughTree();
 	}
-	
-	public static void main(String[] args) {
-		List<Object> tree = new ArrayList<Object>();
-		tree.add(Bridger.FUNCTION);
-		tree.add(Bridger.OPEN);
-		//System.out.print();
-		//System.out.print(Bridger.OPEN);
+	class TestHook {
+		
+		public boolean iterateThroughTreeTest(List<Object> thistree) {
+			tree = thistree;
+			return iterateThroughTree();
+		}
+		
+		public boolean hasRepeatOperatorTest(int i, List<Object> thistree) {
+			tree = thistree;
+			return hasRepeatOperator(i);
+		}
+		
+		public boolean hasRepeatNonConnectorTest(int i, List<Object> thistree) {
+			tree = thistree;
+			return hasRepeatNonConnector(i);
+		}
+		
+		public int checkOpenTest(int i, int openCount, List<Object> thistree) {
+			tree = thistree;
+			return checkOpen(i, openCount);
+		}
+
+		public int checkCloseTest(int i, int closeCount, List<Object> thistree) {
+			tree = thistree;
+			return checkClose(i, closeCount);
+		}
+
+		public int checkCorrectOrderedParenthesisTest(int i, int parenthesisCount, List<Object> thistree) {
+			tree = thistree;
+			return checkCorrectOrderedParenthesis(i, parenthesisCount);
+		}
+
+		public boolean hasValidFirstObjectTest(List<Object> thistree) {
+			tree = thistree;
+			return hasValidFirstObject();
+		}
+
+		public boolean hasValidLastObjectTest(List<Object> thistree) {
+			tree = thistree;
+			return hasValidLastObject();
+		}
+
+		public boolean areRepeatsTest(int i, List<Object> thistree) {
+			tree = thistree;
+			return areRepeats(i);
+		}
+
+		public boolean isEmptyTest(List<Object> thistree) {
+			tree = thistree;
+			return isEmpty();
+		}
 	}
 	
 }
