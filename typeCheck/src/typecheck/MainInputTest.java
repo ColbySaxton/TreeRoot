@@ -51,7 +51,6 @@ public class MainInputTest {
 		allowedTypes1.add("functionfunk(Integer,Integer");
 		allowedTypes1.add("(");
 		allowedTypes1.add(")");
-		allowedTypes2.add("Integer");
 		allowedTypes2.add("Double");
 		allowedTypes2.add("Float");
 		allowedTypes2.add("Complex");
@@ -94,20 +93,20 @@ public class MainInputTest {
 	}
 	
 	/* test fails due to bad object list */
-
-	//@Test
-	//public void testEnterRulesFile() {
-	//	fail("Not yet implemented");
-	//}
-
-	//@Test
-	//public void testEnterTypes() {
-	//	fail("Not yet implemented");
-	//}
-
-	//@Test
-	//public void testMain() {
-	//	fail("Not yet implemented");
-	//}
+	@Test
+	public void testSimpleObject() {
+		newMain.runParser(list2, "test/rules1", allowedTypes1);
+		assertEquals("Tree entered is invalid:\nIssues could be an invalid starting item, multiple operators in a row,"
+				+ "\nor mismatched parentheses.", outContent.toString());
+		System.out.flush();
+	}
+	
+	/* test fails due to having non valid */
+	@Test
+	public void testSimpleTypes() {
+		newMain.runParser(list1, "test/basicRule", allowedTypes2);
+		assertEquals("Tree types are invalid:\nEither the tree contains invalid types\nor more types need to be specified as valid.", outContent.toString());
+		System.out.flush();
+	}
 
 }
