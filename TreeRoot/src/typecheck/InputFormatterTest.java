@@ -9,11 +9,11 @@ import org.junit.Test;
 
 public class InputFormatterTest {
 
-	static List<Object> tree = new ArrayList<Object>();
-
+	InputFormatter.TestHook tester = new InputFormatter(null).new TestHook();
+	
 	@Test
 	public void testMakeTreeString() {
-		List<Object> tree = new ArrayList<Object>(this.tree);
+		List<Object> tree = new ArrayList<Object>();
 		tree.add(Bridger.OPEN);
 		tree.add(2);
 		tree.add(Operator.PLUS);
@@ -31,22 +31,18 @@ public class InputFormatterTest {
 	
 	@Test
 	public void testCheckCurrentType() {
-		InputFormatter tester = new InputFormatter(null);
-		
-		assertEquals("java.lang.Integer", tester.tCheckCurrentType(new Integer(2)));
-		assertEquals("java.lang.Double", tester.tCheckCurrentType(new Double(6.0)));
-		assertEquals("String", tester.tCheckCurrentType("hello world"));
-		assertEquals("function world", tester.tCheckCurrentType("function world"));
-		assertEquals("+", tester.tCheckCurrentType(Operator.PLUS));
+		assertEquals("java.lang.Integer", tester.testCheckCurrentType(new Integer(2)));
+		assertEquals("java.lang.Double", tester.testCheckCurrentType(new Double(6.0)));
+		assertEquals("String", tester.testCheckCurrentType("hello world"));
+		assertEquals("function world", tester.testCheckCurrentType("function world"));
+		assertEquals("+", tester.testCheckCurrentType(Operator.PLUS));
 	}
 	
 	@Test
 	public void testFindCurrentType() {
-		InputFormatter tester = new InputFormatter(null);
-		
-		assertEquals("Integer", tester.tFindCurrentType("java.lang.Integer"));
-		assertEquals("Double", tester.tFindCurrentType("java.lang.Double"));
-		assertEquals("", tester.tFindCurrentType(""));
-		assertEquals("functionf(Double,Double)", tester.tFindCurrentType("functionf(Double,Double)"));
+		assertEquals("Integer", tester.testFindCurrentType("java.lang.Integer"));
+		assertEquals("Double", tester.testFindCurrentType("java.lang.Double"));
+		assertEquals("", tester.testFindCurrentType(""));
+		assertEquals("functionf(Double,Double)", tester.testFindCurrentType("functionf(Double,Double)"));
 	}
 }

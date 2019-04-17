@@ -13,8 +13,10 @@ public class Rules {
 	private StringBarricade barricade;
 	private String readRulesFile;
 	
-	public Rules(String readRules) {
+	public Rules(String readRules, List<String> allowedTypes) {
 		readRulesFile = readRules;
+		rulesMap = new HashMap<String, String>();
+		barricade = new StringBarricade(allowedTypes);
 	}
 	
 	public void parseRules(){

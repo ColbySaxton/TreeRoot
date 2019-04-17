@@ -41,14 +41,14 @@ public class InputFormatter {
 		parseString = parseString + currentItem;
 	}
 	
+	class TestHook{
+		public String testFindCurrentType(String testItem) {
+			return findCurrentType(testItem);
+		}
 	
-	
-	public String tFindCurrentType(String testItem) {
-		return findCurrentType(testItem);
-	}
-	
-	public String tCheckCurrentType(Object testItem) {
-		return checkCurrentType(testItem);
+		public String testCheckCurrentType(Object testItem) {
+			return checkCurrentType(testItem);
+		}
 	}
 
 }
