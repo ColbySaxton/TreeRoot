@@ -16,32 +16,37 @@ public class Parser {
 	/* recursive method that replaces expressions with simplified types
 	 * based on the input rules class
 	 */
-	public String replaceRules(String input) {
-		tree = removeParenthesis(input);
-		boolean hasReplaced = true;
+	public String replaceRules(String input, boolean hasReplaced) {
+		tree = input;
 		HashMap<String, String> ruleMap = ruleSet.getMap();
+		//System.out.println("1");
 		if(hasReplaced == false) {
 			return tree;
 		}
 		else {
+			//System.out.println("2");
 			hasReplaced = false;
 			for(String key: ruleMap.keySet()) {
-				CharSequence thisCharSeq = key;
-				if(tree.contains(thisCharSeq)) {
+				CharSequence thisKey = key;
+				if(tree.contains(thisKey)) {
 					hasReplaced = true;
-					String thisString = key;
-					tree = tree.replaceAll(thisString, ruleMap.get(key));
+					CharSequence thisMapped = ruleMap.get(key);
+					tree = tree.replace(thisKey, thisMapped);
 				}
 			}
-			replaceRules(tree);
+			replaceRules(tree, hasReplaced);
 		}
+		tree = removeParenthesis(tree);
 		return tree;
 	}
 	
 	private String removeParenthesis(String input) {
 		String thisTree = input;
-		thisTree.replaceAll("(", "");
-		thisTree.replaceAll(")", "");
+		CharSequence paren = "(";
+		if(input.contains(paren)) {
+			thisTree.replaceAll("(", "");
+			thisTree.replaceAll(")", "");
+		}
 		return thisTree;
 	}
 	
