@@ -9,7 +9,8 @@ public enum Operator implements Connector {
 	DIVIDE,
 	EXPONENTIAL;
 	
-	private HashMap<Operator, String> stringMap;
+	private HashMap<Operator, String> stringMap = new HashMap<Operator, String>();
+
 	
 	public Operator getType() {
 		return this;
