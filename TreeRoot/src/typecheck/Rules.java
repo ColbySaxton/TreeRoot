@@ -24,11 +24,16 @@ public class Rules {
 		try {
 			reader = new BufferedReader(new FileReader(readRulesFile));
 			String line = reader.readLine();
-			if(barricade.isValid(line)) {
-				List<String> ruleParts = Stream.of(line.replaceAll("\\s+", "").split("="))
-						.map (elem -> new String(elem))
-						.collect(Collectors.toList());
-				addRule(ruleParts.get(0), ruleParts.get(1));
+			while(line != null) {
+				System.out.println(line);
+				if(barricade.isValid(line)) {
+					List<String> ruleParts = Stream.of(line.replaceAll("\\s+", "").split("="))
+							.map (elem -> new String(elem))
+							.collect(Collectors.toList());
+					System.out.println(ruleParts.toString());
+					addRule(ruleParts.get(0), ruleParts.get(1));
+				}
+				line = reader.readLine();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,5 +46,12 @@ public class Rules {
 	
 	private void addRule(String rule, String resultType) {
 		rulesMap.put(rule, resultType);
+	}
+	
+	class TestHook{
+		public void addRuleTest(String rule, String resultType, HashMap<String, String> map) {
+			rulesMap = map;
+			addRule(rule, resultType);
+		}
 	}
 }
