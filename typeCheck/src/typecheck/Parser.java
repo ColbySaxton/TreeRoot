@@ -42,10 +42,9 @@ public class Parser {
 	
 	private String removeParenthesis(String input) {
 		String thisTree = input;
-		CharSequence paren = "(";
-		if(input.contains(paren)) {
-			thisTree.replaceAll("(", "");
-			thisTree.replaceAll(")", "");
+		CharSequence open = "(";
+		if(input.contains(open)) {
+			thisTree = thisTree.replaceAll("[()]", "");
 		}
 		return thisTree;
 	}

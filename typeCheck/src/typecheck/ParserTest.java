@@ -35,38 +35,46 @@ public class ParserTest {
 	}
 	static String inputString1 = "Integer+Float+functionfunction(Primitive+Long)";
 	static String inputString2 = "Double+Integer+Double+functionfunk(Integer,Integer)";
+	static String inputString3 = "((Integer+Float)+functionfunction(Primitive+Long))";
 	static Parser parse1 = new Parser(inputString1, ruleset1);
 	static Parser parse2 = new Parser(inputString2, ruleset2);
+	static Parser parse3 = new Parser(inputString3, ruleset1);
 	
 	private static final Rules rules = null;
 	private static final String tree = null;
 	private static final Parser.TestHook standardHook = new Parser(tree, rules).new TestHook();
-
-	@Test
-	public void testParser() {
-	
-	}
+	private static boolean inputBool = true;
 
 	/** replacerules test **/
 	/* 3 replacements test rule1 */
 	@Test
 	public void testReplaceRules() {
-		boolean input1 = true;
-		assertEquals(parse1.replaceRules(inputString1, input1), "Long");
+		assertEquals(parse1.replaceRules(inputString1, inputBool), "Long");
 	}
 	
 	/* mixed invalid rules */
 	@Test
 	public void testMixedInvalidRules() {
-		boolean input = true;
-		assertEquals(parse2.replaceRules(inputString2, input), "Float");
+		assertEquals(parse2.replaceRules(inputString2, inputBool), "Float");
 	}
 	
-	/* works with removing parentheses */
+	/* parenthesis in rules */
+	@Test
+	public void testParenthesisRules() {
+		assertEquals(parse1.replaceRules(inputString3, inputBool), "Long");
+	}
 	
-	//@Test
-	//public void removeParenthesesTest {
-	//	assertEquals(standardHook.removeParenthesisTest("((Integer + Float))"), "Integer + Float");
-	//}
+	/** works with removing parentheses **/
+	/* has parentheses to remove */
+	@Test
+	public void trueremoveParenthesesTest() {
+		assertEquals(standardHook.removeParenthesisTest("((Integer + Float))"), "Integer + Float");
+	}
+	
+	/* does not have parentheses */
+	@Test
+	public void falseremoveParenthesesTest() {
+		assertEquals(standardHook.removeParenthesisTest("Integer + Float"), "Integer + Float");
+	}
 
 }
