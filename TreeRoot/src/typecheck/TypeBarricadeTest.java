@@ -19,10 +19,7 @@ public class TypeBarricadeTest {
 	static {
 		int i = 1;
 		Operator plus = Operator.PLUS;
-		Operator minus = Operator.MINUS;
-		Operator exp = Operator.EXPONENTIAL;
 		Bridger open = Bridger.OPEN;
-		Bridger close = Bridger.CLOSE;
 		double j = 1.0;
 		String foo = "function(Integer + Double)";
 		String integer = "Integer";

@@ -1,31 +1,39 @@
 package typecheck;
-import java.util.ArrayList;
 import java.util.List;
 
+
+/* This class is the barricade which all input from the object tree must pass through */
 public class TreeBarricade implements Barricade {
 	private List<Object> tree;
 	
+	/* This method iterates through the tree list and parses it */
 	private boolean iterateThroughTree() {
 		int openCount = 0;
 		int closeCount = 0;
 		int parenthesisCount = 0;
+		
+		/* for loop iterates through tree */
 		for(int i = 0; i < tree.size(); i++) {
 			if(areRepeats(i)) {
+				System.out.println("ERROR: input has repeated object types.");
 				return false;
 			}
 			if(isNotStringFunction(i)) {
+				System.out.println("ERROR: input a string that is not a function.");
 				return false;
 			}
 			openCount = checkOpen(i, openCount);
 			closeCount = checkClose(i, closeCount);
 			parenthesisCount = checkCorrectOrderedParenthesis(i, parenthesisCount);
 			if(parenthesisCount < 0) {
+				System.out.println("ERROR: order of parentheses are incorrect.");
 				return false;
 			}
 		}
 		return openCount == closeCount;
 	}
 	
+	/* This method checks to see if the object at i is a String that does not start with Function */
 	private boolean isNotStringFunction(int i) {
 		Object object = tree.get(i);
 		if(object instanceof String) {
@@ -34,6 +42,7 @@ public class TreeBarricade implements Barricade {
 		return false;
 	}
 	
+	/* Checks to see if there are any repeated operators at i */
 	private boolean hasRepeatOperator(int i) {
 		if(i == 0) {
 			return false;
@@ -43,6 +52,7 @@ public class TreeBarricade implements Barricade {
 		return firstIter && secondIter;
 	}
 	
+	/* Checks to see if there are any repeated not connector objects next to each other at i */
 	private boolean hasRepeatNonConnector(int i) {
 		if(i == 0) {
 			return false;
@@ -53,6 +63,7 @@ public class TreeBarricade implements Barricade {
 		
 	}
 	
+	/* checks to see if at i if there is an open paren. Iterates openCount if so */
 	private int checkOpen(int i, int openCount) {
 		int count = openCount;
 		if(tree.get(i) instanceof Bridger) {
@@ -63,6 +74,7 @@ public class TreeBarricade implements Barricade {
 		return count;
 	}
 	
+	/* checks to see if at i if there is a close paren. Iterates closeCount if so */
 	private int checkClose(int i, int closeCount) {
 		int count = closeCount;
 		if(tree.get(i) instanceof Bridger) {
@@ -73,6 +85,7 @@ public class TreeBarricade implements Barricade {
 		return count;
 	}
 	
+	/* keeps track of the order of parenthesis, adds one if open, subtracts one if closed */
 	private int checkCorrectOrderedParenthesis(int i, int parenthesisCount) {
 		int count = parenthesisCount;
 		if(tree.get(i) instanceof Bridger) {
@@ -86,6 +99,7 @@ public class TreeBarricade implements Barricade {
 		return count;
 	}
 	
+	/* checks if the first object is valid (if it isnt an operator without a minus) */
 	private boolean hasValidFirstObject() {
 		return (tree.get(0) instanceof Operator) ? ((Operator)tree.get(0)).getType() == Operator.MINUS : true;
 	}
@@ -93,10 +107,12 @@ public class TreeBarricade implements Barricade {
 	private boolean hasValidLastObject() {
 		int lastIndex = tree.size() - 1;
 		if(tree.get(lastIndex) instanceof Operator) {
+			System.out.println("ERROR: has object cannot be an operator.");
 			return false;
 		}
 		if(tree.get(lastIndex) instanceof Bridger) {
 			if(!(((Bridger)tree.get(lastIndex)).getType() == Bridger.CLOSE)) {
+				System.out.println("ERROR: cannot end with an open parenthesis.");
 				return false;
 			}
 		}
@@ -108,11 +124,18 @@ public class TreeBarricade implements Barricade {
 	}
 	
 	public boolean isEmpty() {
-		return tree.isEmpty();
+		if(tree.isEmpty()) {
+			System.out.println("ERROR: the list of objects is empty.");
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isValid(List<Object> newTree) {
 		tree = newTree;
+		if(!hasValidFirstObject()) {
+			System.out.println("ERROR: has invalid first object.");
+		}
 		return !isEmpty() && hasValidFirstObject() && hasValidLastObject() && iterateThroughTree();
 	}
 	

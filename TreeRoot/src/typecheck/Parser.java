@@ -1,9 +1,6 @@
 package typecheck;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Optional;
 
 public class Parser {
 	private Rules ruleSet;
@@ -14,48 +11,26 @@ public class Parser {
 		tree = thistree;
 	}
 	
-	public String parse() {
-		replaceRules(tree);
-	}
-	
-	private void iterateThroughRules() {
-		
-	}
-	
-	private Operator operatorOfStandardOperation(String input) {
-		
-	}
-	
-	private boolean hasParenthesis(String input) {
-		
-	}
-	
-	private boolean hasExponential(String input) {
-		
-	}
-	
-	private boolean hasTimesorDivide(String input) {
-		
-	}
-	
-	private String removeParentheses(String input) {
-		
-	}
-	
-	private String replaceRules(String input) {
+	public String replaceRules(String input) {
+		tree = input;
+		boolean hasReplaced = true;
 		HashMap<String, String> ruleMap = ruleSet.getMap();
-		for(String key: ruleMap.keySet()) {
-			CharSequence thisCharSeq = key;
-			if(input.contains(thisCharSeq)) {
-				String thisString = key;
-				input = input.replaceAll(thisString, ruleMap.get(key));
-			}
+		if(hasReplaced == false) {
+			return tree;
 		}
-		return input;
-	}
-	
-	private Object returnTypeofRule(String input) {
-		
+		else {
+			hasReplaced = false;
+			for(String key: ruleMap.keySet()) {
+				CharSequence thisCharSeq = key;
+				if(tree.contains(thisCharSeq)) {
+					hasReplaced = true;
+					String thisString = key;
+					tree = tree.replaceAll(thisString, ruleMap.get(key));
+				}
+			}
+			replaceRules(tree);
+		}
+		return tree;
 	}
 	
 }
