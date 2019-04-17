@@ -19,3 +19,7 @@
 /StringBarricadeTest.class
 /BridgerTest.class
 /OperatorTest.class
+/Rules$TestHook.class
+/RulesTest.class
+/ParserTest.class
+/Parser$TestHook.class

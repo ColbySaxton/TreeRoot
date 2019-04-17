@@ -45,4 +45,10 @@ public class Parser {
 		return thisTree;
 	}
 	
+	class TestHook {
+		public String removeParenthesisTest(String input) {
+			return removeParenthesis(input);
+		}
+	}
+	
 }
