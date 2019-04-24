@@ -5,12 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/* A barricade class for the Rules class
+ * It makes sure all the rules only resolve to 
+ * allowed types and that the expression for the rule
+ * would be valid in an arithmetic statement
+ * Also does the same validity checks for function rules
+ * 
+ * @author Justin
+ *
+ */
 public class StringBarricade implements Barricade {
 	private String input;
 	private List<String> allowedTypes;
 	
-	/**Initializes the barricade for Rules
-	 * 
+	/**Creates a barricade for certain allowed types
+	 * used for the Rules class to make sure the line
+	 * entered is in the proper format
 	 * @param types the types allowed in the tree
 	 */
 	public StringBarricade(List<String> types) {
@@ -21,7 +31,7 @@ public class StringBarricade implements Barricade {
 	/**Checks whether the rule contains an operator
 	 * or is a function
 	 * @param rule = the expression of the rule such as "Integer+Double"
-	 * @return whether the rule is valid or not
+	 * @return whether the expression is in the proper format
 	 */
 	private boolean isValidRule(String rule) {
 		List<CharSequence> operators = new ArrayList<CharSequence>();
@@ -61,7 +71,7 @@ public class StringBarricade implements Barricade {
 		return split.length == 2;
 	}
 	
-	/**Whether the line is empty
+	/** Checks whether there is input
 	 * 
 	 */
 	public boolean isEmpty() {
@@ -69,7 +79,7 @@ public class StringBarricade implements Barricade {
 	}
 	
 	/**Splits the line into separate portions using "=" as a marker
-	 * also removes all whitespaces
+	 * and removes all white spaces
 	 * @return the individual items in an array
 	 */
 	private String[] splitRuleAndReturn() {

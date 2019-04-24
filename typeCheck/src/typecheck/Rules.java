@@ -7,7 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+/** The Rules for the parsing of the tree parser 
+ * to follow. They all contain either an expression
+ * or function that resolves into a single type
+ * For example, Integer + Integer = Double is a valid rule
+ * @author Justin
+ *
+ */
 public class Rules {
 	private HashMap<String, String> rulesMap;
 	private StringBarricade barricade;
@@ -26,9 +32,11 @@ public class Rules {
 	}
 	
 	/**Parses all the rules in the file
-	 * Uses the isValid method in the String barricade
 	 * makes sure the rules put in the tree all are in 
-	 * valid format and resolve to allowed types
+	 * valid format and resolve to allowed types through
+	 * the String Barricade 
+	 * Possibly throws an IO, FileNotFoundException if the file
+	 * for rules does not exist.
 	 */
 	public void parseRules(){
 		BufferedReader reader;
@@ -50,7 +58,7 @@ public class Rules {
 		}
 	}
 	
-	/**Returns the map of rules generated
+	/**Returns the map of the valid rules
 	 * 
 	 * @return the map of rules generated
 	 */
@@ -58,7 +66,7 @@ public class Rules {
 		return new HashMap<String, String>(rulesMap);
 	}
 	
-	/** Method to add a rule to the map
+	/** Method to add a rule to the existing ones
 	 * 
 	 * @param rule = the expression of the rule
 	 * @param resultType = the resolved type of the rule

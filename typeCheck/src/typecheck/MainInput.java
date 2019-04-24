@@ -1,7 +1,6 @@
 package typecheck;
 
-import java.io.FileNotFoundException;
-import java.util.HashMap;
+
 import java.util.List;
 
 public class MainInput {

@@ -3,7 +3,12 @@ package typecheck;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+/** Turns the validated tree into a
+ * string only containing the types and 
+ * the operators in between them.
+ * @author Justin
+ *
+ */
 public class InputFormatter {
 	private String parseString;
 	private List<Object> restOfTree;
@@ -31,9 +36,8 @@ public class InputFormatter {
 	}
 	
 	/**Checks what the type of each object is and
-	 * in the case of a string whether it is a function
-	 * or not
-	 * Also checks whether it is a connector
+	 * contains special cases to detect functions
+	 * and connectors, such as +,-,*,/
 	 * @param currentItem = the current item to be processed in the tree
 	 * @return the String of the type name
 	 */
@@ -46,8 +50,7 @@ public class InputFormatter {
 	}
 	
 	/**Cuts the type to a single word since the checkType
-	 * gets the names as java.lang.Integer and similar
-	 * names so removes 
+	 * gets the names as java.lang.Integer 
 	 * @param currentItem = the type to be worked on
 	 * @return the shortened name of the type
 	 */
@@ -58,7 +61,7 @@ public class InputFormatter {
 		return wordParts.get(wordParts.size() - 1);
 	}
 	
-	/**Inserts the type into the string tree
+	/**Inserts the type into the tree string
 	 * 
 	 * @param currentItem = type to be inserted
 	 */
